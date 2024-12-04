@@ -67,7 +67,7 @@ userRowData = driver.find_element(By.CLASS_NAME, "v5-row-level-0")
 userColData = userRowData.find_elements(By.CSS_SELECTOR, ".sc-gsnTZi.fqXKKX")
 
 content =[]
-content.append([rowData.text for rowData in userColData])
+content.append(str( [rowData.text for rowData in tableData]))
 print(content)
 # for d in tableData:
     # print(d.text)
