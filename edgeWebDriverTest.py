@@ -8,6 +8,8 @@ from selenium.webdriver.common.keys import Keys
 
 import time
 
+import csv
+
 desiredSleepTime = 1
 
 options = webdriver.EdgeOptions()
@@ -64,10 +66,34 @@ time.sleep(desiredSleepTime*3)
 tableData = driver.find_elements(By.CLASS_NAME, "v5-row-level-0")
 
 userRowData = driver.find_element(By.CLASS_NAME, "v5-row-level-0")
-userColData = userRowData.find_elements(By.CSS_SELECTOR, ".sc-gsnTZi.fqXKKX")
+# userNameOrgUnitData = userRowData.find_elements(By.CSS_SELECTOR, ".sc-gsnTZi.fqXKKX") #student Name and Org unit
+# userAddedInfo= userRowData.find_elements(By.CSS_SELECTOR, ".v5-cell.v5-column-sort") #added on column
+# studentEmail= userRowData.find_elements(By.CSS_SELECTOR, ".sc-dSqHuY.dJebBY") #student email
 
+# print(userNameOrgUnitData)
+# print(studentEmail)
 content =[]
-content.append(str( [rowData.text for rowData in tableData]))
+
+
+for rowData in tableData:
+    tempList = []
+    userNameOrgUnitData = rowData.find_elements(By.CSS_SELECTOR, ".sc-gsnTZi.fqXKKX") #student Name and Org unit
+    userAddedInfo= rowData.find_elements(By.CSS_SELECTOR, ".v5-cell.v5-column-sort") #added on column
+    studentEmail= rowData.find_elements(By.CSS_SELECTOR, ".sc-dSqHuY.dJebBY") #student email
+
+    for rowData in userNameOrgUnitData:
+        tempList.append(rowData.text)
+    for rowData in userAddedInfo:
+        tempList.append(rowData.text)
+    for rowData in studentEmail:
+        tempList.append(rowData.text)
+    print(tempList)
+    content.append(tempList)
+
+
+
+# content.append(str( [rowData.text for rowData in tableData]))
+
 print(content)
 # for d in tableData:
     # print(d.text)
@@ -84,7 +110,22 @@ while(True):
         time.sleep(desiredSleepTime*3)
         
         tableData = driver.find_elements(By.CLASS_NAME, "v5-row-level-0")
-        content.append(str([rowData.text for rowData in tableData]))
+        for rowData in tableData:
+            tempList = []
+            userNameOrgUnitData = rowData.find_elements(By.CSS_SELECTOR, ".sc-gsnTZi.fqXKKX") #student Name and Org unit
+            userAddedInfo= rowData.find_elements(By.CSS_SELECTOR, ".v5-cell.v5-column-sort") #added on column
+            studentEmail= rowData.find_elements(By.CSS_SELECTOR, ".sc-dSqHuY.dJebBY") #student email
+
+            for rowData in userNameOrgUnitData:
+                tempList.append(rowData.text)
+            for rowData in userAddedInfo:
+                tempList.append(rowData.text)
+            for rowData in studentEmail:
+                tempList.append(rowData.text)
+            print(tempList)
+            content.append(tempList)
+        # print(content)
+        # content.append(str([rowData.text for rowData in tableData]))
 
         continue
         
@@ -95,5 +136,10 @@ while(True):
         break
 
 print(content)
-time.sleep(60)
+outputCsvPath = r"C:\Users\Mwiinga.Nathan\OneDrive - West Ada School District\Desktop\Code\WebScraper\outputFile.csv"
+with open(outputCsvPath, mode='w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerows(content)
+print("CSV Created.")
+time.sleep(6)
 driver.quit()
