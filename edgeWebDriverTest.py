@@ -33,7 +33,7 @@ element.click()
 #enter User Email Address
 time.sleep(desiredSleepTime)
 userEmailSelection = driver.find_element(By.CLASS_NAME,"whsOnd")
-userEmailSelection.send_keys("mwiinga.nathan@westada.org", Keys.ENTER)
+userEmailSelection.send_keys("<lastname.firstname@Organization.org>", Keys.ENTER)
 
 #enter User Email Password
 time.sleep(desiredSleepTime*3)
@@ -59,7 +59,7 @@ custonGroupSelection = driver.find_element(By.LINK_TEXT,"Custom Groups" )
 custonGroupSelection.send_keys(Keys.ENTER)
 
 time.sleep(desiredSleepTime*3)
-specifiedGroupSelection = driver.find_element(By.LINK_TEXT,"Internet Limited")
+specifiedGroupSelection = driver.find_element(By.LINK_TEXT,"Internet Limited") #You can target a specific group by name here!
 specifiedGroupSelection.send_keys(Keys.ENTER)
 
 time.sleep(desiredSleepTime*3)
