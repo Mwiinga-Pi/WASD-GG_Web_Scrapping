@@ -52,7 +52,7 @@ time.sleep(desiredSleepTime*30)
 
 def loopGGPullGroups(groupName):
     time.sleep(desiredSleepTime*3)
-    specifiedGroupSelection = driver.find_element(By.LINK_TEXT, gr)
+    specifiedGroupSelection = driver.find_element(By.LINK_TEXT, groupName)
     specifiedGroupSelection.send_keys(Keys.ENTER)
 
     time.sleep(desiredSleepTime*3)
