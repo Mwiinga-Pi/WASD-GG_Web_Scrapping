@@ -33,7 +33,7 @@ element.click()
 #enter User Email Address
 time.sleep(desiredSleepTime)
 userEmailSelection = driver.find_element(By.CLASS_NAME,"whsOnd")
-userEmailSelection.send_keys("<lastname.firstname@Organization.org>", Keys.ENTER)
+userEmailSelection.send_keys("mwiinga.nathan@westada.org", Keys.ENTER)
 
 #enter User Email Password
 time.sleep(desiredSleepTime*3)
@@ -63,7 +63,7 @@ specifiedGroupSelection = driver.find_element(By.LINK_TEXT,"Internet Limited") #
 specifiedGroupSelection.send_keys(Keys.ENTER)
 
 time.sleep(desiredSleepTime*3)
-tableData = driver.find_elements(By.CLASS_NAME, "v5-row-level-0")
+tableData = driver.find_elements(By.CLASS_NAME, "v5-row-level-0") # gets all the rows from the table
 
 userRowData = driver.find_element(By.CLASS_NAME, "v5-row-level-0")
 # userNameOrgUnitData = userRowData.find_elements(By.CSS_SELECTOR, ".sc-gsnTZi.fqXKKX") #student Name and Org unit
@@ -77,6 +77,18 @@ content =[]
 studentNameCSS_Selector = ".sc-jqUVSM.gcZKBE"
 addedOnCSS_Selector = ".v5-cell.v5-column-sort"
 studentNameCSS_Selector = ".sc-keNpes.ltfIc"
+
+for eachRow in tableData:
+    tempList = []
+    rowColumns = eachRow.find_elements(By.CLASS_NAME, "v5-cell") # creates a list 7 items long w/ all fields
+                                                                #   Only need items 1, 2, 4, and 5 (ignore index 0, 6)
+    tempList.append(rowColumns[1].text.split("\n")[0]) # name
+    tempList.append(rowColumns[1].text.split("\n")[1]) # email
+    tempList.append(rowColumns[2].text) # Org unit
+    tempList.append(rowColumns[4].text) # Added on date
+    tempList.append(rowColumns[5].text) # Added by
+    print(tempList)
+    content.append(tempList)
 
 for rowData in tableData:
     tempList = []
@@ -145,4 +157,5 @@ with open(outputCsvPath, mode='w', newline='') as file:
     writer.writerows(content)
 print("CSV Created.")
 time.sleep(6)
+
 driver.quit()
