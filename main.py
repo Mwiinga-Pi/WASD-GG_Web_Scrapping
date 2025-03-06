@@ -33,7 +33,7 @@ element.click()
 #enter User Email Address
 time.sleep(desiredSleepTime)
 userEmailSelection = driver.find_element(By.CLASS_NAME,"whsOnd")
-userEmailSelection.send_keys("<lastname.firstname@Organization.org>", Keys.ENTER)
+userEmailSelection.send_keys("mwiinga.nathan@westada.org", Keys.ENTER)
 
 #enter User Email Password
 time.sleep(desiredSleepTime*3)
@@ -76,13 +76,13 @@ content =[]
 
 studentNameCSS_Selector = ".sc-jqUVSM.gcZKBE"
 addedOnCSS_Selector = ".v5-cell.v5-column-sort"
-studentNameCSS_Selector = ".sc-keNpes.ltfIc"
+studentEmailCSS_Selector = ".sc-keNpes.ltfIc"
 
 for rowData in tableData:
     tempList = []
     userNameOrgUnitData = rowData.find_elements(By.CSS_SELECTOR, studentNameCSS_Selector) #student Name and Org unit
     userAddedInfo= rowData.find_elements(By.CSS_SELECTOR, addedOnCSS_Selector) #added on column
-    studentEmail= rowData.find_elements(By.CSS_SELECTOR, studentNameCSS_Selector) #student email
+    studentEmail= rowData.find_elements(By.CSS_SELECTOR, studentEmailCSS_Selector) #student email
 
     for rowData in userNameOrgUnitData:
         tempList.append(rowData.text)
@@ -117,7 +117,7 @@ while(True):
             tempList = []
             userNameOrgUnitData = rowData.find_elements(By.CSS_SELECTOR, studentNameCSS_Selector) #student Name and Org unit
             userAddedInfo= rowData.find_elements(By.CSS_SELECTOR, addedOnCSS_Selector) #added on column
-            studentEmail= rowData.find_elements(By.CSS_SELECTOR, studentNameCSS_Selector) #student email
+            studentEmail= rowData.find_elements(By.CSS_SELECTOR, studentEmailCSS_Selector) #student email
 
             for rowData in userNameOrgUnitData:
                 tempList.append(rowData.text)
